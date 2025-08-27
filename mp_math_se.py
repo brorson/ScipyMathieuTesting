@@ -276,8 +276,11 @@ if __name__ == "__main__":
     parser.add_argument('-N', default=2500, type=int)
     parser.add_argument('-Ne', default=35, type=int)
     parser.add_argument('--folder', type=os.path.abspath)
+    parser.add_argument('--dps', type=int, default=25)
     args = parser.parse_args()
 
+    mp.dps = 25  # Set precision
+    
     q, N, Ne = args.q, args.N, args.Ne
     folder = args.folder
     write_mathieu_se_gvs(q=q, N=N, Ne=Ne, folder=folder)

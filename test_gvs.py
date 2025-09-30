@@ -29,7 +29,7 @@ import os
 import csv
 
 
-file_pattern = '/Users/aliamy/Desktop/Mathieu/ScipyMathieuTesting/python_generated_gvs/python_mathieu_ce_gvs_q*'
+file_pattern = 'ScipyMathieuTesting/python_generated_gvs/python_mathieu_ce_gvs_q*'
 matching_files = glob.glob(file_pattern)
 row_headers = np.linspace(-180, 180, 2500)
 row_index = range(2500)
@@ -64,7 +64,7 @@ for file in matching_files:
                 #     print(f'mathieu_cem when q:{q}, v:{v}, m:{m} does not pass the test, scipy value:{sp}, gv: {gv}, diff: {diff} ')
 
     results_df = pd.DataFrame({'m': m_npass, 'v': v_npass, 'gv': gv_npass, 'sp': sp_npass, 'diff': diff_npass})
-    results_df.to_csv(f"/Users/aliamy/Desktop/Mathieu/ScipyMathieuTesting/python_not_passed_ce/not_passed_ce_q{q}.csv", index=False)
+    results_df.to_csv(f"ScipyMathieuTesting/python_not_passed_ce/not_passed_ce_q{q}.csv", index=False)
 
 
 
@@ -73,13 +73,13 @@ for file in matching_files:
 # In[ ]:
 
 
-print(len('/Users/aliamy/Desktop/Mathieu/ScipyMathieuTesting/python_generated_gvs/python_mathieu_se_gvs_q'))
+print(len('ScipyMathieuTesting/python_generated_gvs/python_mathieu_se_gvs_q'))
 
 
 # In[ ]:
 
 
-file_pattern = '/Users/aliamy/Desktop/Mathieu/ScipyMathieuTesting/python_generated_gvs/python_mathieu_se_gvs_q*'
+file_pattern = 'ScipyMathieuTesting/python_generated_gvs/python_mathieu_se_gvs_q*'
 matching_files = glob.glob(file_pattern)
 row_headers = np.linspace(-180, 180, 2500)
 row_index = range(2500)
@@ -112,11 +112,11 @@ for file in matching_files:
                 # print(f'mathieu_sem when q:{q}, v:{v}, m:{m} does not pass the test, scipy value:{sp}, gv: {gv}, diff: {diff} ')
 
     results_df = pd.DataFrame({'m': m_npass, 'v': v_npass, 'gv': gv_npass, 'sp': sp_npass, 'diff': diff_npass})
-    results_df.to_csv(f"/Users/aliamy/Desktop/Mathieu/ScipyMathieuTesting/python_not_passed_se/not_passed_se_q{q}.csv", index=False)
+    results_df.to_csv(f"ScipyMathieuTesting/python_not_passed_se/not_passed_se_q{q}.csv", index=False)
 
 
 # In[ ]:
-
+#a 
 
 print(mathieu_sem(1, -0.001, -180))
 

@@ -38,7 +38,7 @@ for file in matching_files:
     print(file)
     data = np.loadtxt(file, delimiter=',', skiprows=1)
 
-    q = float(file[94:-4])
+    q = float(file[64:-4])
 
 
     diff_npass = []
@@ -88,7 +88,7 @@ print(matching_files)
 for file in matching_files:
     print(file)
     data = np.loadtxt(file, delimiter=',', skiprows=1)
-    q = float(file[94:-4])
+    q = float(file[64:-4])
     print(q)
 
 

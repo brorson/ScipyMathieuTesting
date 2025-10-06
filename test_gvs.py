@@ -114,6 +114,7 @@ for file in matching_files:
     results_df = pd.DataFrame({'m': m_npass, 'v': v_npass, 'gv': gv_npass, 'sp': sp_npass, 'diff': diff_npass})
     results_df.to_csv(f"ScipyMathieuTesting/python_not_passed_se/not_passed_se_q{q}.csv", index=False)
 
+print('Finished running test')
 
 # In[ ]:
 #a 

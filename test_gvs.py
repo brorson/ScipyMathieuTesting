@@ -31,7 +31,7 @@ import csv
 
 file_pattern = 'ScipyMathieuTesting/python_generated_gvs/python_mathieu_ce_gvs_q*'
 matching_files = glob.glob(file_pattern)
-row_headers = np.linspace(-180, 180, 2500)
+row_headers = np.linspace(-np.pi, np.pi, 2500)
 row_index = range(2500)
 
 for file in matching_files:
@@ -81,7 +81,7 @@ print(len('ScipyMathieuTesting/python_generated_gvs/python_mathieu_se_gvs_q'))
 
 file_pattern = 'ScipyMathieuTesting/python_generated_gvs/python_mathieu_se_gvs_q*'
 matching_files = glob.glob(file_pattern)
-row_headers = np.linspace(-180, 180, 2500)
+row_headers = np.linspace(-np.pi, np.pi, 2500)
 row_index = range(2500)
 
 print(matching_files)

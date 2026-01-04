@@ -30,7 +30,7 @@ print("TT = %d, Computation of b took %e seconds" % (TT, elapsed_time))
 
 
 #=======================================================================
-# Now time computation of function
+# Now time computation of angular fcns.
 
 m =10
 q = 25.4
@@ -53,4 +53,56 @@ for i in range(TT):
 end_time = time.time()
 elapsed_time = end_time-start_time
 print("TT = %d, Computation of se took %e seconds" % (TT, elapsed_time))
- 
+
+
+#=======================================================================
+# Now time computation of radial fcns (first kind).
+
+m =10
+q = 25.4
+N = 200                         # Number of sample pts
+v = np.linspace(0, 50, N)   # Fcn domain
+
+
+start_time = time.time()
+for i in range(TT):
+    ce,_ = mathieu_modcem1(m,q,v)
+end_time = time.time()
+elapsed_time = end_time-start_time
+print("TT = %d, Computation of modcem1 took %e seconds" % (TT, elapsed_time))
+
+
+start_time = time.time()
+for i in range(TT):
+    se,_ = mathieu_modsem1(m,q,v)
+end_time = time.time()
+elapsed_time = end_time-start_time
+print("TT = %d, Computation of modsem1 took %e seconds" % (TT, elapsed_time))
+
+
+#=======================================================================
+# Now time computation of radial fcns (second kind).
+
+m =10
+q = 25.4
+N = 200                         # Number of sample pts
+v = np.linspace(0, 50, N)   # Fcn domain
+
+
+start_time = time.time()
+for i in range(TT):
+    ce,_ = mathieu_modcem2(m,q,v)
+end_time = time.time()
+elapsed_time = end_time-start_time
+print("TT = %d, Computation of modcem2 took %e seconds" % (TT, elapsed_time))
+
+
+start_time = time.time()
+for i in range(TT):
+    se,_ = mathieu_modsem2(m,q,v)
+end_time = time.time()
+elapsed_time = end_time-start_time
+print("TT = %d, Computation of modsem2 took %e seconds" % (TT, elapsed_time))
+
+
+

@@ -44,7 +44,8 @@ for i in range(len(ms)):
         w = y1 * y2d - y1d * y2
         
         # Err results
-        errs[i, j] = np.log10(np.std(w - wtrue))
+        #errs[i, j] = np.log10(np.std(w - wtrue)) # abs err
+        errs[i, j] = np.log10(np.std((w - wtrue)/wtrue)) # rel err
         X[i, j] = m
         Y[i, j] = np.log10(q)
 
@@ -54,7 +55,7 @@ cs = plt.contourf(X, Y, errs, levels=levels)
 plt.clabel(cs, inline=True)
 plt.xlabel('Order m')
 plt.ylabel('log10(q)')
-plt.title('Log10 of Wronskian error -- Mc1 Mc2')
+plt.title('Log10 of Wronskian rel error -- Mc1 Mc2')
 plt.clim(-20, 10)
 plt.colorbar()
 #plt.show(block=False)
@@ -81,7 +82,8 @@ for i in range(len(ms)):
         w = y1 * y2d - y1d * y2
         
         # Err results
-        errs[i, j] = np.log10(np.std(w - wtrue))
+        #errs[i, j] = np.log10(np.std(w - wtrue))  # Abs err
+        errs[i, j] = np.log10(np.std((w - wtrue)/wtrue)) # rel err
         X[i, j] = m
         Y[i, j] = np.log10(q)
 
@@ -91,7 +93,7 @@ cs = plt.contourf(X, Y, errs, levels=levels)
 plt.clabel(cs, inline=True)
 plt.xlabel('Order m')
 plt.ylabel('log10(q)')
-plt.title('Log10 of Wronskian error -- ms1 ms2')
+plt.title('Log10 of Wronskian rel error -- ms1 ms2')
 plt.clim(-20, 10)
 plt.colorbar()
 #plt.show(block=False)
@@ -119,7 +121,8 @@ for i in range(len(ms)):
         w = y1 * y2d - y1d * y2
         
         # Err results
-        errs[i, j] = np.log10(np.std(w - wtrue))
+        #errs[i, j] = np.log10(np.std(w - wtrue))  # Abs err
+        errs[i, j] = np.log10(np.std((w - wtrue)/wtrue)) # rel err
         X[i, j] = m
         Y[i, j] = np.log10(q)
 
@@ -129,7 +132,7 @@ cs = plt.contourf(X, Y, errs, levels=levels)
 plt.clabel(cs, inline=True)
 plt.xlabel('Order m')
 plt.ylabel('log10(q)')
-plt.title('Log10 of Wronskian error -- mc1 ms2')
+plt.title('Log10 of Wronskian rel error -- mc1 ms2')
 plt.clim(-20, 10)
 plt.colorbar()
 #plt.show(block=False)
@@ -157,7 +160,8 @@ for i in range(len(ms)):
         w = y1 * y2d - y1d * y2
         
         # Err results
-        errs[i, j] = np.log10(np.std(w - wtrue))
+        #errs[i, j] = np.log10(np.std(w - wtrue)) # Abs err
+        errs[i, j] = np.log10(np.std((w - wtrue)/wtrue)) # rel err
         X[i, j] = m
         Y[i, j] = np.log10(q)
 
@@ -167,7 +171,7 @@ cs = plt.contourf(X, Y, errs, levels=levels)
 plt.clabel(cs, inline=True)
 plt.xlabel('Order m')
 plt.ylabel('log10(q)')
-plt.title('Log10 of Wronskian error -- ms1 mc2')
+plt.title('Log10 of Wronskian rel error -- ms1 mc2')
 plt.clim(-20, 10)
 plt.colorbar()
 #plt.show(block=False)

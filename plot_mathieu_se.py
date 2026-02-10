@@ -25,7 +25,7 @@ def plot_mathieu_se():
         plt.plot(v, y, color=colors[i])
         leg.append(f"m = {m}")
 
-    plt.title("Mathieu se2n")
+    plt.title("Mathieu se2m+2")
     plt.xlabel("v")
     plt.ylabel("se")
     plt.legend(leg, loc="lower left")
@@ -40,7 +40,7 @@ def plot_mathieu_se():
         plt.plot(v, y, color=colors[i])
         leg.append(f"m = {m}")
 
-    plt.title("Mathieu se2n+1")
+    plt.title("Mathieu se2m+1")
     plt.xlabel("v")
     plt.ylabel("se")
     plt.legend(leg, loc="lower left")

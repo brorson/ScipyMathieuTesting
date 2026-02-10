@@ -34,7 +34,7 @@ def plot_mathieu_ce():
         plt.plot(v, y, color=colors[i])
         leg.append(f"m = {m}")
 
-    plt.title("Mathieu ce2n")
+    plt.title("Mathieu ce2m")
     plt.legend(leg, loc="lower left")
     plt.xlabel("v")
     plt.ylabel("ce")
@@ -49,7 +49,7 @@ def plot_mathieu_ce():
         plt.plot(v, y, color=colors[i])
         leg.append(f"m = {m}")
 
-    plt.title("Mathieu ce2n+1")
+    plt.title("Mathieu ce2m+1")
     plt.legend(leg, loc="lower left")
     plt.xlabel("v")
     plt.ylabel("ce")

@@ -37,7 +37,7 @@ def plot_mathieu_modms2():
         y = mathieu_modms2(m, q, v)
         plt.plot(v, y, color=colors[i], label=f"m = {m}")
 
-    plt.title("Modified Mathieu of second kind Ms2n")
+    plt.title("Modified Mathieu of second kind Ms2m+2")
     plt.legend()
     plt.ylim([-2, 2])
 
@@ -48,7 +48,7 @@ def plot_mathieu_modms2():
         y = mathieu_modms2(m, q, v)
         plt.plot(v, y, color=colors[i], label=f"m = {m}")
 
-    plt.title("Modified Mathieu of second kind Ms2n+1")
+    plt.title("Modified Mathieu of second kind Ms2m+1")
     plt.legend()
     plt.ylim([-2, 2])
 

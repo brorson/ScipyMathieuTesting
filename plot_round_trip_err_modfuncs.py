@@ -152,7 +152,7 @@ qs = np.logspace(-4,4,10)
 error = []
 
 for q in qs:
-    for m in range(MM):  
+    for m in range(1,MM):  
         ym3 = modms1(m, q, v - 3 * h)[0]
         ym2 = modms1(m, q, v - 2 * h)[0]
         ym1 = modms1(m, q, v - h)[0]
@@ -203,7 +203,7 @@ qs = np.logspace(-4,4,10)
 error = []
 
 for q in qs:
-    for m in range(MM):  
+    for m in range(1,MM):  
         ym3 = modms2(m, q, v - 3 * h)[0]
         ym2 = modms2(m, q, v - 2 * h)[0]
         ym1 = modms2(m, q, v - h)[0]

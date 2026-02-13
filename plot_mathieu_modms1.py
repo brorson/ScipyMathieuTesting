@@ -36,7 +36,7 @@ def plot_mathieu_modms1():
         y = mathieu_modms1(m, q, v)
         plt.plot(v, y, color=colors[i], label=f"m = {m}")
 
-    plt.title("Modified Mathieu of first kind Ms2n (placeholder)")
+    plt.title("Modified Mathieu of first kind Ms2m+2")
     plt.xlabel("v")
     plt.ylabel("Function value")
     plt.legend()
@@ -49,7 +49,7 @@ def plot_mathieu_modms1():
         y = mathieu_modms1(m, q, v)
         plt.plot(v, y, color=colors[i], label=f"m = {m}")
 
-    plt.title("Modified Mathieu of first kind Ms2n+1 (placeholder)")
+    plt.title("Modified Mathieu of first kind Ms2m+1")
     plt.xlabel("v")
     plt.ylabel("Function value")
     plt.legend()
@@ -84,7 +84,7 @@ def plot_mathieu_modms1():
     ym = mathieu_modms1(m, q, u)
 
     plt.plot(u, yj, label="Bessel J")
-    plt.plot(u, ym, label="Mathieu modms1 (placeholder)")
+    plt.plot(u, ym, label="Mathieu modms1")
     plt.title("Asymptotic behavior: modms1 vs Bessel J")
     plt.xlabel("u")
     plt.ylabel("Function value")

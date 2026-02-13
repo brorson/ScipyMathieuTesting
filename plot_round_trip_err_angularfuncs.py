@@ -70,7 +70,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Round trip rel error for ce")
+plt.title("Round trip rel error for ce - second derivative")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
@@ -121,7 +121,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Round trip rel error for se")
+plt.title("Round trip rel error for se - second derivative")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 

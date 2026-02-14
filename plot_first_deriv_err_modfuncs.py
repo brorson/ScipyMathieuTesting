@@ -134,7 +134,6 @@ tol = 1e-3
 MM = 50
 qs = np.logspace(-4,4,10)
 error = []
-fignum = 1
 
 for q in qs:
     for m in range(MM):  

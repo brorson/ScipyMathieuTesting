@@ -21,7 +21,7 @@ qs = np.logspace(-4, 4, 30)
 
 # Domain
 N = 100
-v = np.linspace(5, 10, N)[:, None]  # Column vector
+v = np.linspace(2, 10, N)[:, None]  # Column vector
 
 # True value of Wronskian
 wtrue = 2 / np.pi
@@ -35,7 +35,7 @@ def make_plot(fig_num, X, Y, errs, title, filename):
 
     plt.figure(fig_num, figsize=(8, 6))
 
-    levels = np.arange(-25, 36, 5)
+    levels = np.arange(-20, 10, 5)
 
     cs = plt.contourf(X, Y, errs, levels=levels)
     plt.clabel(cs, inline=True)

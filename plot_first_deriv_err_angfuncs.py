@@ -46,7 +46,7 @@ for q in qs:
         # Residual
         r = yd-y0d
         stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
+        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
         e = stddev/l2norm  # Rel err
         error.append( e )
@@ -96,7 +96,7 @@ for q in qs:
         # Residual
         r = yd-y0d
         stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
+        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
         e = stddev/l2norm  # Rel err
         error.append( e )

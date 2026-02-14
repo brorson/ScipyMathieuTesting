@@ -1,12 +1,19 @@
 import numpy as np
 import scipy as sp
 from scipy.special import *
+
+# Use non-GUI backend (no Tk needed)
 import matplotlib
-matplotlib.use('TkAgg')  # or 'Qt5Agg', 'QtAgg', 'GTK3Agg'
+matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
 
-# This fcn creates plots of the error of the Bessel impls in
-# scipy.  Scipy seems to use the Cepehes library for the Bessels.
+
+# ============================================================
+# This script creates plots of the error of the Bessel
+# implementations in SciPy.
+# ============================================================
+
 
 # Parameters to vary
 ms = np.arange(1, 51)
@@ -14,91 +21,107 @@ MM = len(ms)
 
 # Domain
 N = 100
-z = np.linspace(.1, 10, N)  # Column vector
+z = np.linspace(0.1, 10, N)
 
 
-#===================================================================
+# ============================================================
 # Jn & Jn
-print('Computing Wronskian of Jn & Jn')
+# ============================================================
 
-# Matrix of error values
+print("Computing Wronskian of Jn & Jn")
+
+# Matrices
 errs = np.zeros((MM, N))
 X = np.zeros_like(errs)
 Y = np.zeros_like(errs)
 
 # Loop over m
-for i in range(len(ms)):
+for i in range(MM):
     m = ms[i]
-    print(f'-----------  m = {m}  -----------')
+    print(f"-----------  m = {m}  -----------")
 
-    # Compute Wronskian -- this is mth column
-    w = jv(m+1,z)*jv(-m,z) + jv(m,z)*jv(-m-1,z)
-    wtrue = -2*np.sin(m*np.pi)/(np.pi*z)
+    # Compute Wronskian
+    w = jv(m + 1, z) * jv(-m, z) + jv(m, z) * jv(-m - 1, z)
+    wtrue = -2 * np.sin(m * np.pi) / (np.pi * z)
 
-    # Compute pointwise error at each z
+    # Error
     err = np.abs(w - wtrue)
-    errs[i, :] = np.log10(err + 1.1e-25)  # Add small value to avoid log(0)
-    
-    # Fill coordinate arrays
+    errs[i, :] = np.log10(err + 1.1e-25)
+
+    # Coordinates
     X[i, :] = m
     Y[i, :] = z
 
 
-plt.figure(1)
+# Plot
+plt.figure(figsize=(8, 6))
+
 levels = np.arange(-25, 36, 5)
+
 cs = plt.contourf(X, Y, errs, levels=levels)
 plt.clabel(cs, inline=True)
-plt.xlabel('Order m')
-plt.ylabel('z')
-plt.title('Log10 of Wronskian error -- Jn, Jn')
+
+plt.xlabel("Order m")
+plt.ylabel("z")
+plt.title("Log10 of Wronskian error -- Jn, Jn")
 plt.clim(-20, 10)
 plt.colorbar()
-#plt.show(block=False)
-plt.draw()           # Draw the figure
-plt.pause(0.001)     # Give GUI time to render
+
+# Save figure
+plt.savefig("wronskian_Jn_Jn.png", dpi=300, bbox_inches="tight")
+plt.close()
+
+print("Saved: wronskian_Jn_Jn.png")
 
 
-#===================================================================
+# ============================================================
 # Jn & Yn
-print('Computing Wronskian of Jn & Yn')
+# ============================================================
 
-# Matrix of error values
+print("Computing Wronskian of Jn & Yn")
+
+# Matrices
 errs = np.zeros((MM, N))
 X = np.zeros_like(errs)
 Y = np.zeros_like(errs)
 
 # Loop over m
-for i in range(len(ms)):
+for i in range(MM):
     m = ms[i]
-    print(f'-----------  m = {m}  -----------')
+    print(f"-----------  m = {m}  -----------")
 
-    # Compute Wronskian -- this is mth column
-    w = jv(m+1,z)*yv(m,z) - jv(m,z)*yv(m+1,z)
-    wtrue = 2/(np.pi*z)
+    # Compute Wronskian
+    w = jv(m + 1, z) * yv(m, z) - jv(m, z) * yv(m + 1, z)
+    wtrue = 2 / (np.pi * z)
 
-    # Compute pointwise error at each z
+    # Error
     err = np.abs(w - wtrue)
-    errs[i, :] = np.log10(err + 1.1e-25)  # Add small value to avoid log(0)
-    
-    # Fill coordinate arrays
+    errs[i, :] = np.log10(err + 1.1e-25)
+
+    # Coordinates
     X[i, :] = m
     Y[i, :] = z
 
 
-plt.figure(2)
+# Plot
+plt.figure(figsize=(8, 6))
+
 levels = np.arange(-25, 36, 5)
+
 cs = plt.contourf(X, Y, errs, levels=levels)
 plt.clabel(cs, inline=True)
-plt.xlabel('Order m')
-plt.ylabel('z')
-plt.title('Log10 of Wronskian error -- Jn, Yn')
+
+plt.xlabel("Order m")
+plt.ylabel("z")
+plt.title("Log10 of Wronskian error -- Jn, Yn")
 plt.clim(-20, 10)
 plt.colorbar()
-#plt.show(block=False)
-plt.draw()           # Draw the figure
-plt.pause(0.001)     # Give GUI time to render
+
+# Save figure
+plt.savefig("wronskian_Jn_Yn.png", dpi=300, bbox_inches="tight")
+plt.close()
+
+print("Saved: wronskian_Jn_Yn.png")
 
 
-# Do this to stop the program from closing all windows when
-# exiting
-input("Press Enter to close...") 
+print("\nAll plots generated successfully.")

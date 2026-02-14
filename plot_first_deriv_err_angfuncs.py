@@ -23,8 +23,7 @@ def se(m, q, x):
 # Check first deriv of ce
 NN = 100
 v = np.linspace(-np.pi,np.pi,NN)
-h = 1e-4
-h2 = h*h
+h = 1e-3
 tol = 1e-3
 MM = 50
 qs = np.logspace(-4,4,10)
@@ -57,7 +56,7 @@ for q in qs:
 
 M, Q = np.meshgrid(range(MM), qs)
 error_array = np.array(error).reshape(M.shape)
-levels = np.arange(-20, 20, 5)
+levels = np.arange(-20, 10, 5)
 
 plt.figure(1)
 plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
@@ -72,13 +71,12 @@ plt.pause(0.001)     # Give GUI time to render
 
 #==========================================================
 # Round trip se
-NN = 100
-v = np.linspace(-np.pi,np.pi,NN)
-h = 1e-4
-h2 = h*h
-tol = 1e-3
-MM = 50
-qs = np.logspace(-4,4,10)
+#NN = 100
+#v = np.linspace(-np.pi,np.pi,NN)
+#h = 1e-4
+#tol = 1e-3
+#MM = 50
+#qs = np.logspace(-4,4,10)
 error = []
 
 for q in qs:
@@ -107,7 +105,7 @@ for q in qs:
 
 M, Q = np.meshgrid(range(MM), qs)
 error_array = np.array(error).reshape(M.shape)
-levels = np.arange(-20, 20, 5)
+# levels = np.arange(-20, 20, 5)
 
 plt.figure(2)
 plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')

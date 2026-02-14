@@ -45,9 +45,29 @@ def plot_mathieu_se():
     plt.ylabel("se")
     plt.legend(leg, loc="lower left")
 
+    # ----------------------------------------------------------
+    # Plot se and derivative together
+    N = 250
+    u = np.linspace(0, 2 * np.pi, N)
+    m = 3
+    q = 5.0
+
+    # Compute Mathieu function and derivative
+    y, yd = mathieu_sem(m, q, u)
+
+    txt = "m = %d\nq = %5.2f" % (m,q)
+    plt.figure(3)
+    plt.plot(u, y, label="se")
+    plt.plot(u, yd, label="sed")
+    plt.title("se and sed")
+    plt.text(2.7,2.5,txt)
+    plt.xlabel("u")
+    plt.ylabel("se, sed")
+    plt.legend()
+
     plt.show()
 
-
+    
 # ----------------------------------------------------------
 # Run the function
 if __name__ == "__main__":

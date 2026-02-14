@@ -40,8 +40,23 @@ def plot_mathieu_ce():
     plt.ylabel("ce")
 
     # ----------------------------------------------------------
-    # Odd ce functions: m = 1,3,5,7
+    # Even ce function derivs: m = 0,2,4,6
     plt.figure(2)
+    leg = []
+
+    for i, m in enumerate(range(0, 7, 2)):
+        yd = mathieu_cem(m, q, v)[1]
+        plt.plot(v, yd, color=colors[i])
+        leg.append(f"m = {m}")
+
+    plt.title("Mathieu ce2m derivative")
+    plt.legend(leg, loc="lower left")
+    plt.xlabel("v")
+    plt.ylabel("ced")
+    
+    # ----------------------------------------------------------
+    # Odd ce functions: m = 1,3,5,7
+    plt.figure(3)
     leg = []
 
     for i, m in enumerate(range(1, 8, 2)):
@@ -53,6 +68,41 @@ def plot_mathieu_ce():
     plt.legend(leg, loc="lower left")
     plt.xlabel("v")
     plt.ylabel("ce")
+
+    # ----------------------------------------------------------
+    # Odd ce function derivs: m = 1,3,5,7
+    plt.figure(4)
+    leg = []
+
+    for i, m in enumerate(range(1, 8, 2)):
+        yd = mathieu_cem(m, q, v)[1]
+        plt.plot(v, yd, color=colors[i])
+        leg.append(f"m = {m}")
+
+    plt.title("Mathieu ce2m+1 derivative")
+    plt.legend(leg, loc="lower left")
+    plt.xlabel("v")
+    plt.ylabel("ced")
+    
+    # ----------------------------------------------------------
+    # Plot ce and derivative together
+    N = 250
+    u = np.linspace(0, 2 * np.pi, N)
+    m = 3
+    q = 5.0
+
+    # Compute Mathieu function and derivative
+    y, yd = mathieu_cem(m, q, u)
+
+    txt = "m = %d\nq = %5.2f" % (m,q)
+    plt.figure(5)
+    plt.plot(u, y, label="ce")
+    plt.plot(u, yd, label="ced")
+    plt.title("ce and ced")
+    plt.text(2.5,2.7,txt)
+    plt.xlabel("u")
+    plt.ylabel("ce, ced")
+    plt.legend()
 
     # ==========================================================
     # Compare against high-order finite-difference approximation
@@ -75,17 +125,10 @@ def plot_mathieu_ce():
 
     plt_range = slice(5, N - 4)
 
-    # ----------------------------------------------------------
-    # Plot ce and derivative
-    plt.figure(6)
-    plt.plot(u, y, label="ce")
-    plt.plot(u, yd, label="ced")
-    plt.title("ce and ced")
-    plt.legend()
 
     # ----------------------------------------------------------
     # Plot deviation from FD approximation
-    plt.figure(7)
+    plt.figure(6)
     plt.plot(u[plt_range], r[plt_range])
     plt.title("Deviation from finite diff approx")
     plt.xlabel("u")

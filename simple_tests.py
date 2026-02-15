@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 
 
 N = 200                         # Number of sample pts
-v = np.linspace(-180, 180, N)   # Fcn domain -- note this is degrees, not rads. 
+#v = np.linspace(-180, 180, N)   # Fcn domain -- note this is degrees, not rads.
+v = np.linspace(-np.pi, np.pi, N)   # Fcn domain -- this is rads for new impl.
 
 
 #--------------------------------------------------------

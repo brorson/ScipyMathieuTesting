@@ -61,3 +61,28 @@ for i in range(N):
     
 fig.suptitle("Mathieu ce(%d,q,v) for varying q" % m)
 plt.show()
+
+
+#--------------------------------------------------------
+# Now create a figure and 10 vertically stacked subplots.
+# For some values of q we get the wrong Mathieu function.
+fig, axs = plt.subplots(10, 1, figsize=(8, 12), sharex=True)
+
+# Array of q (frequency parameter) values.
+qs = np.array([20.5, 20.6, 20.7, 20.8, 20.9, 21.0, 21.1, 21.2, 21.3, 21.4])
+N = len(qs)
+m = 5   # Order of Mathieu fcn
+
+for i in range(N):
+    q = qs[i]
+    ce,_ = mathieu_cem(m,q,v)
+    axs[i].plot(v, ce)
+    axs[i].grid(True)
+
+axs[-1].set_xlabel('v')
+for i in range(N):
+    ax = axs[i]
+    ax.text(-20,-0.6,'q = %3.1f' % qs[i])        
+    
+fig.suptitle("Mathieu ce(%d,q,v) for varying q" % m)
+plt.show()

@@ -74,7 +74,9 @@ for i, m in enumerate(ms):
 
         w = y1 * y2d - y1d * y2
 
-        errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        #errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        rms = np.sqrt(np.mean((w - wtrue)**2))
+        errs[i, j] = np.log10(rms)
 
         X[i, j] = m
         Y[i, j] = np.log10(q)
@@ -82,7 +84,7 @@ for i, m in enumerate(ms):
 
 make_plot(
     1, X, Y, errs,
-    "Log10 of Wronskian rel error -- Mc1 Mc2",
+    "Log10 of Wronskian rms error -- Mc1 Mc2",
     "wronskian_Mc1_Mc2.png"
 )
 
@@ -108,7 +110,9 @@ for i, m in enumerate(ms):
 
         w = y1 * y2d - y1d * y2
 
-        errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        #errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        rms = np.sqrt(np.mean((w - wtrue)**2))
+        errs[i, j] = np.log10(rms)
 
         X[i, j] = m
         Y[i, j] = np.log10(q)
@@ -116,7 +120,7 @@ for i, m in enumerate(ms):
 
 make_plot(
     2, X, Y, errs,
-    "Log10 of Wronskian rel error -- Ms1 Ms2",
+    "Log10 of Wronskian rms error -- Ms1 Ms2",
     "wronskian_Ms1_Ms2.png"
 )
 
@@ -142,7 +146,9 @@ for i, m in enumerate(ms):
 
         w = y1 * y2d - y1d * y2
 
-        errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        #errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        rms = np.sqrt(np.mean((w - wtrue)**2))
+        errs[i, j] = np.log10(rms)
 
         X[i, j] = m
         Y[i, j] = np.log10(q)
@@ -150,7 +156,7 @@ for i, m in enumerate(ms):
 
 make_plot(
     3, X, Y, errs,
-    "Log10 of Wronskian rel error -- Mc1 Ms2",
+    "Log10 of Wronskian rms error -- Mc1 Ms2",
     "wronskian_Mc1_Ms2.png"
 )
 
@@ -176,7 +182,9 @@ for i, m in enumerate(ms):
 
         w = y1 * y2d - y1d * y2
 
-        errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        #errs[i, j] = np.log10(np.std((w - wtrue) / wtrue))
+        rms = np.sqrt(np.mean((w - wtrue)**2))
+        errs[i, j] = np.log10(rms)
 
         X[i, j] = m
         Y[i, j] = np.log10(q)
@@ -184,9 +192,12 @@ for i, m in enumerate(ms):
 
 make_plot(
     4, X, Y, errs,
-    "Log10 of Wronskian rel error -- Ms1 Mc2",
+    "Log10 of Wronskian rms error -- Ms1 Mc2",
     "wronskian_Ms1_Mc2.png"
 )
 
 
 print("\nAll plots generated successfully.")
+# Do this to stop the program from closing all windows when
+# exiting
+input("Press Enter to close...") 

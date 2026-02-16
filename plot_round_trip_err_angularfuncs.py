@@ -28,11 +28,13 @@ def mathieu_b(m, q):
 # Round trip ce
 NN = 100
 v = np.linspace(-np.pi,np.pi,NN)
-h = 1e-4
+h = 3e-4
 h2 = h*h
 tol = 1e-3
-MM = 50
+MM = 100
 qs = np.logspace(-4,4,10)
+print("Computing round trip err for ce.  h = %e\n" % h)
+
 error = []
 
 for q in qs:
@@ -52,11 +54,17 @@ for q in qs:
         a = mathieu_a(m,q)
 
         r = ydd + (a - 2 * q * np.cos(2*v)) * y0
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
+        #e = stddev/l2norm  # Rel err
+
+        # Absolute RMS error
+        e = np.sqrt(np.mean(r**2))
+        # Relative RMS error
+        #e = np.sqrt(np.mean((r**2)/y0))
         error.append( e )
+
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
 
@@ -70,20 +78,22 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Round trip rel error for ce - second derivative")
+plt.title("Round trip abs rms error for ce - second derivative")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
 
 #==========================================================
 # Round trip se
-NN = 100
-v = np.linspace(-np.pi,np.pi,NN)
-h = 1e-4
-h2 = h*h
-tol = 1e-3
-MM = 50
-qs = np.logspace(-4,4,10)
+#NN = 100
+#v = np.linspace(-np.pi,np.pi,NN)
+#h = 1e-4
+#h2 = h*h
+#tol = 1e-3
+#MM = 50
+#qs = np.logspace(-4,4,10)
+print("Computing round trip err for se.  h = %e\n" % h)
+
 error = []
 
 for q in qs:
@@ -103,11 +113,17 @@ for q in qs:
         a = mathieu_b(m,q)
 
         r = ydd + (a - 2 * q * np.cos(2*v)) * y0
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
+        #e = stddev/l2norm  # Rel err
+
+        # Absolute RMS error
+        e = np.sqrt(np.mean(r**2))
+        # Relative RMS error
+        #e = np.sqrt(np.mean((r**2)/y0))
         error.append( e )
+
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
 
@@ -121,7 +137,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Round trip rel error for se - second derivative")
+plt.title("Round trip abs rms error for se - second derivative")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 

@@ -28,13 +28,16 @@ def modms2(m, q, x):
 # Check first deriv of modmc1
 NN = 100
 v = np.linspace(2,5,NN)  # Testing domain.
-h = 1e-4
-h2 = h*h
+h = 3e-4
+
 tol = 1e-3
 MM = 50
 qs = np.logspace(-4,4,10)
 error = []
 fignum = 1
+
+print("Testing modmc1, h = %e\n" % h)
+
 
 for q in qs:
     for m in range(MM):  
@@ -53,10 +56,16 @@ for q in qs:
 
         # Residual
         r = yd-y0d
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        #e = stddev/l2norm  # Rel err
+
+        # Absolute RMS error
+        #e = np.sqrt(np.mean(r**2))
+        # Relative RMS error
+        e = np.sqrt(np.mean((r/y0)**2))
+
         error.append( e )
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
@@ -68,12 +77,12 @@ levels = np.arange(-20, 10, 5)
 
 plt.figure(fignum)
 fignum=fignum+1
-plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
+plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis', extend='both')
 plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Check modmc1 first deriv against finite difference")
+plt.title("modmc1 deriv -- rel rms err against 6th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
@@ -81,6 +90,7 @@ plt.pause(0.001)     # Give GUI time to render
 #==========================================================
 # Check first deriv of modms1
 error = []
+print("Testing modms1, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
@@ -99,11 +109,18 @@ for q in qs:
 
         # Residual
         r = yd-y0d
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        #e = stddev/l2norm  # Rel err
+
+        # Absolute RMS error
+        #e = np.sqrt(np.mean(r**2))
+        # Relative RMS error
+        e = np.sqrt(np.mean((r/y0)**2))
+
         error.append( e )
+
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
 #        print(f'm = {m}, q = {q}, error = {e}')
@@ -114,26 +131,21 @@ error_array = np.array(error).reshape(M.shape)
 
 plt.figure(fignum)
 fignum=fignum+1
-plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
+plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis', extend='both')
 plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Check modms1 first deriv against finite difference")
+plt.title("modms1 deriv -- rel rms err against 6th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
 
 #==========================================================
 # Check first deriv of modmc2
-NN = 100
 v = np.linspace(2,5,NN)  # Testing domain.
-h = 1e-4
-h2 = h*h
-tol = 1e-3
-MM = 50
-qs = np.logspace(-4,4,10)
 error = []
+print("Testing modmc2, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
@@ -152,11 +164,18 @@ for q in qs:
 
         # Residual
         r = yd-y0d
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        #e = stddev/l2norm  # Rel err
+
+        # Absolute RMS error
+        #e = np.sqrt(np.mean(r**2))
+        # Relative RMS error
+        e = np.sqrt(np.mean((r/y0)**2))
+
         error.append( e )
+
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
 #        print(f'm = {m}, q = {q}, error = {e}')
@@ -167,12 +186,12 @@ levels = np.arange(-20, 10, 5)
 
 plt.figure(fignum)
 fignum=fignum+1
-plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
+plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis', extend='both')
 plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Check modmc2 first deriv against finite difference")
+plt.title("modmc2 deriv -- rel rms err against 6th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
@@ -180,6 +199,7 @@ plt.pause(0.001)     # Give GUI time to render
 #==========================================================
 # Check first deriv of modms2
 error = []
+print("Testing modms2, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
@@ -198,11 +218,18 @@ for q in qs:
 
         # Residual
         r = yd-y0d
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        #e = stddev/l2norm  # Rel err
+
+        # Absolute RMS error
+        #e = np.sqrt(np.mean(r**2))
+        # Relative RMS error
+        e = np.sqrt(np.mean((r/y0)**2))
+
         error.append( e )
+
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
 #        print(f'm = {m}, q = {q}, error = {e}')
@@ -213,12 +240,12 @@ error_array = np.array(error).reshape(M.shape)
 
 plt.figure(fignum)
 fignum=fignum+1
-plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
+plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis', extend='both')
 plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Check modms2 first deriv against finite difference")
+plt.title("modms2 deriv -- rel rms err against 6th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 

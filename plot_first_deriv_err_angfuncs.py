@@ -23,11 +23,13 @@ def se(m, q, x):
 # Check first deriv of ce
 NN = 100
 v = np.linspace(-np.pi,np.pi,NN)
-h = 1e-3
-tol = 1e-3
-MM = 50
+h = 3e-4
+
+tol = 1e-4
+MM = 100
 qs = np.logspace(-4,4,10)
 error = []
+print("Testing ce, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
@@ -45,10 +47,12 @@ for q in qs:
 
         # Residual
         r = yd-y0d
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = 1 # np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        #e = stddev/l2norm  # Rel err
 
-        e = stddev/l2norm  # Rel err
+        e = np.sqrt(np.mean(r**2))
         error.append( e )
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
@@ -64,7 +68,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Check ce first deriv against finite difference")
+plt.title("ce first deriv -- abs RMS err against 6th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
@@ -78,6 +82,7 @@ plt.pause(0.001)     # Give GUI time to render
 #MM = 50
 #qs = np.logspace(-4,4,10)
 error = []
+print("Testing se, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
@@ -95,10 +100,12 @@ for q in qs:
 
         # Residual
         r = yd-y0d
-        stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
-        l2norm = np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
 
-        e = stddev/l2norm  # Rel err
+        #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
+        #l2norm = 1 # np.linalg.norm(y0d, ord=2) / np.sqrt(len(y0d))
+        #e = stddev/l2norm  # Rel err
+
+        e = np.sqrt(np.mean(r**2))        
         error.append( e )
         if not np.isclose( e , 0, atol=tol):
             print(f'm = {m}, q = {q}, error = {e}')
@@ -113,7 +120,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("Check se first deriv against finite difference")
+plt.title("se first deriv -- abs RMS err against 6th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 

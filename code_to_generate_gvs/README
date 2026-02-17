@@ -1,0 +1,10 @@
+The stuff in this directory makes GVs and puts them in a file for
+later testing.  This is Alia's port of the Matlab GV stuff to
+Python.  The mp_math programs used mpmath to create the GVs.  However,
+the mpmath eigendecomposition routines took far too long to run, so this
+effort was abandoned.
+
+The np_gvs use NumPy to do the computations.
+
+Summer & Fall 2025.
+

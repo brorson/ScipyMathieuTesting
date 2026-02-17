@@ -5,7 +5,7 @@ future) Mathieu functions in Scipy.  These tests were developed by
 Stuart Brorson and students at Northeastern University in 2025 --
 2026.  They highlight deficiencies in the existing Mathieu
 implementations and serve as validation tests for the new Mathieu
-implementation. 
+implementation.  The figures in the paper under https://github.com/brorson/ScipyMathieuPaper/tree/main were created using stuff from this directory.
 
 # Plotting functions:
 
@@ -19,7 +19,9 @@ plot_mathieu_modms1.py, plot_mathieu_modmc2.py, plot_mathieu_modms2.py
 * plot_first_deriv_angfuncs.py, plot_first_deriv_angfuncs.py -- Plots
 First derivative of Mathieu functions
 
-# The following tests are of interest:
+# Selected test functions:
+
+These were used to create the heat maps presented in the paper.
 
 * simple_tests.py -- Creates two plots: For the existing Scipy Mathieu
 impl the first plot shows the jumps in
@@ -49,5 +51,18 @@ Then plots the rel error as a heat map vs. m and q.
   Wronskian of the J and Y Bessel functions.  This is just an accuracy
   check on the Bessel fcns provided by the Cephes library.
 
+*  plot_first_deriv_err_angfuncs.py, plot_first_deriv_err_modfuncs.py --
+Computes the first derivative of the fncs using a finite-difference
+scheme, and then compares to the value returned by the impl.  Creates a
+heat map of the error vs. m and q.
 
+# Other files:
+
+This directory holds many different numerical experiments in varying
+states of completion.  Of import:
+
+*  GVs -- Many files were used to perform golden-value testing.
+Golden values were generated for the angular functions using a
+collocation method, and then compared against the values returned by
+the implementation.  This work is largely complete, but not organized.
 

@@ -87,7 +87,7 @@ def plot_mathieu_ce():
     # ----------------------------------------------------------
     # Plot ce and derivative together
     N = 250
-    u = np.linspace(0, 2 * np.pi, N)
+    u = np.linspace(-np.pi, np.pi, N)
     m = 3
     q = 5.0
 
@@ -100,7 +100,7 @@ def plot_mathieu_ce():
     plt.plot(u, yd, label="ced")
     plt.title("ce and ced")
     plt.text(2.5,2.7,txt)
-    plt.xlabel("u")
+    plt.xlabel("v")
     plt.ylabel("ce, ced")
     plt.legend()
 
@@ -131,7 +131,7 @@ def plot_mathieu_ce():
     plt.figure(6)
     plt.plot(u[plt_range], r[plt_range])
     plt.title("Deviation from finite diff approx")
-    plt.xlabel("u")
+    plt.xlabel("v")
     plt.ylabel("residual")
 
     # Error diagnostics

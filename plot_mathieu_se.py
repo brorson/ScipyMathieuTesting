@@ -48,7 +48,7 @@ def plot_mathieu_se():
     # ----------------------------------------------------------
     # Plot se and derivative together
     N = 250
-    u = np.linspace(0, 2 * np.pi, N)
+    u = np.linspace(-np.pi, np.pi, N)
     m = 3
     q = 5.0
 
@@ -61,7 +61,7 @@ def plot_mathieu_se():
     plt.plot(u, yd, label="sed")
     plt.title("se and sed")
     plt.text(2.7,2.5,txt)
-    plt.xlabel("u")
+    plt.xlabel("v")
     plt.ylabel("se, sed")
     plt.legend()
 

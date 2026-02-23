@@ -99,7 +99,7 @@ def plot_mathieu_ce():
     plt.plot(u, y, label="ce")
     plt.plot(u, yd, label="ced")
     plt.title("ce and ced")
-    plt.text(2.5,2.7,txt)
+    plt.text(0.0,2.7,txt)
     plt.xlabel("v")
     plt.ylabel("ce, ced")
     plt.legend()

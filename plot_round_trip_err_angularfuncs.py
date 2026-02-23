@@ -26,12 +26,12 @@ def mathieu_b(m, q):
 
 #==========================================================
 # Round trip ce
-NN = 100
+NN = 100  # Number of sample pts.
 v = np.linspace(-np.pi,np.pi,NN)
 h = 3e-4
 h2 = h*h
 tol = 1e-3
-MM = 100
+MM = 50   # Highest order
 qs = np.logspace(-4,4,10)
 print("Computing round trip err for ce.  h = %e\n" % h)
 
@@ -39,17 +39,21 @@ error = []
 
 for q in qs:
     for m in range(MM):  
-        ym3 = ce(m, q, v - 3 * h)[0]
+        #ym3 = ce(m, q, v - 3 * h)[0]
         ym2 = ce(m, q, v - 2 * h)[0]
         ym1 = ce(m, q, v - h)[0]
         y0  = ce(m, q, v)[0] 
         yp1 = ce(m, q, v + h)[0]
         yp2 = ce(m, q, v + 2 * h)[0]
-        yp3 = ce(m, q, v + 3 * h)[0]
+        #yp3 = ce(m, q, v + 3 * h)[0]
+
+        # 4th order coeffs:
+        # −1/12 	4/3 	−5/2 	4/3 	−1/12
+        ydd = (-ym2/12 + 4*ym1/3 - 5*y0/2 + 4*yp1/3 - yp2/12)/h2
 
  	# 6th order coeffs:
         #  1/90 	−3/20 	3/2 	−49/18 	3/2 	−3/20 	1/90
-        ydd = (ym3/90 - 3*ym2/20 + 3*ym1/2 - 49*y0/18 + 3*yp1/2 - 3*yp2/20 + yp3/90)/h2
+        #ydd = (ym3/90 - 3*ym2/20 + 3*ym1/2 - 49*y0/18 + 3*yp1/2 - 3*yp2/20 + yp3/90)/h2
 
         a = mathieu_a(m,q)
 
@@ -70,10 +74,10 @@ for q in qs:
 
 M, Q = np.meshgrid(range(MM), qs)
 error_array = np.array(error).reshape(M.shape)
-levels = np.arange(-10, 20, 5)
+levels = np.arange(-15, 5, 5)
 
 plt.figure(1)
-plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
+plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis', extend='both')
 plt.colorbar()
 
 plt.xlabel("m")
@@ -85,34 +89,31 @@ plt.pause(0.001)     # Give GUI time to render
 
 #==========================================================
 # Round trip se
-#NN = 100
-#v = np.linspace(-np.pi,np.pi,NN)
-#h = 1e-4
-#h2 = h*h
-#tol = 1e-3
-#MM = 50
-#qs = np.logspace(-4,4,10)
 print("Computing round trip err for se.  h = %e\n" % h)
 
 error = []
 
 for q in qs:
     for m in range(MM):  
-        ym3 = se(m, q, v - 3 * h)[0]
+        #ym3 = se(m, q, v - 3 * h)[0]
         ym2 = se(m, q, v - 2 * h)[0]
         ym1 = se(m, q, v - h)[0]
         y0  = se(m, q, v)[0] 
         yp1 = se(m, q, v + h)[0]
         yp2 = se(m, q, v + 2 * h)[0]
-        yp3 = se(m, q, v + 3 * h)[0]
+        #yp3 = se(m, q, v + 3 * h)[0]
+
+        # 4th order coeffs:
+        # −1/12 	4/3 	−5/2 	4/3 	−1/12
+        ydd = (-ym2/12 + 4*ym1/3 - 5*y0/2 + 4*yp1/3 - yp2/12)/h2
 
  	# 6th order coeffs:
         #  1/90 	−3/20 	3/2 	−49/18 	3/2 	−3/20 	1/90
-        ydd = (ym3/90 - 3*ym2/20 + 3*ym1/2 - 49*y0/18 + 3*yp1/2 - 3*yp2/20 + yp3/90)/h2
+        #ydd = (ym3/90 - 3*ym2/20 + 3*ym1/2 - 49*y0/18 + 3*yp1/2 - 3*yp2/20 + yp3/90)/h2
 
-        a = mathieu_b(m,q)
+        b = mathieu_b(m,q)
 
-        r = ydd + (a - 2 * q * np.cos(2*v)) * y0
+        r = ydd + (b - 2 * q * np.cos(2*v)) * y0
 
         #stddev = np.std(r)  # Stdev of residual.  Should be zero in ideal case.
         #l2norm = np.linalg.norm(y0, ord=2) / np.sqrt(len(y0))
@@ -129,10 +130,9 @@ for q in qs:
 
 M, Q = np.meshgrid(range(MM), qs)
 error_array = np.array(error).reshape(M.shape)
-levels = np.arange(-10, 20, 5)
 
 plt.figure(2)
-plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
+plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis', extend='both')
 plt.colorbar()
 
 plt.xlabel("m")

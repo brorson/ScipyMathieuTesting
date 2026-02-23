@@ -2,7 +2,7 @@
 """
 This calls the Mathieu angular fcn impl and gets the fcn value and its
 first deriv.  Then it computes the first deriv of the fcn using
-a 6th order finite-difference formula.  It then compares the FD result
+a 4th order finite-difference formula.  It then compares the FD result
 against the result returned by the fcn impl and makes a heat map of
 the error.
 """
@@ -21,29 +21,33 @@ def se(m, q, x):
 
 #==========================================================
 # Check first deriv of ce
-NN = 100
+NN = 100  # Number of sample pts
 v = np.linspace(-np.pi,np.pi,NN)
-h = 3e-4
+h = 1e-4
 
 tol = 1e-4
-MM = 100
+MM = 50  # max order to test
 qs = np.logspace(-4,4,10)
 error = []
 print("Testing ce, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
-        ym3 = ce(m, q, v - 3 * h)[0]
+        #ym3 = ce(m, q, v - 3 * h)[0]
         ym2 = ce(m, q, v - 2 * h)[0]
         ym1 = ce(m, q, v - h)[0]
         y0,y0d  = ce(m, q, v)
         yp1 = ce(m, q, v + h)[0]
         yp2 = ce(m, q, v + 2 * h)[0]
-        yp3 = ce(m, q, v + 3 * h)[0]
+        #yp3 = ce(m, q, v + 3 * h)[0]
 
- 	# 6th order coeffs for first deriv:
+ 	# 4th order coeffs for first deriv:
+        #  1/12 	−2/3 	0 	2/3 	−1/12
+        yd = (ym2/12 - 2*ym1/3 + 0*y0 + 2*yp1/3 - yp2/12)/h
+
+        # 6th order coeffs for first deriv:
         #  −1/60	3/20	−3/4	0	3/4	−3/20	1/60
-        yd = (-ym3/60 + 3*ym2/20 - 3*ym1/4 + 0*y0 + 3*yp1/4 - 3*yp2/20 + yp3/60)/h
+        #yd = (-ym3/60 + 3*ym2/20 - 3*ym1/4 + 0*y0 + 3*yp1/4 - 3*yp2/20 + yp3/60)/h
 
         # Residual
         r = yd-y0d
@@ -60,7 +64,7 @@ for q in qs:
 
 M, Q = np.meshgrid(range(MM), qs)
 error_array = np.array(error).reshape(M.shape)
-levels = np.arange(-20, 10, 5)
+levels = np.arange(-15, 5, 5)
 
 plt.figure(1)
 plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
@@ -68,7 +72,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("ce first deriv -- abs RMS err against 6th order FD")
+plt.title("ce first deriv -- abs RMS err against 4th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 
@@ -86,17 +90,21 @@ print("Testing se, h = %e\n" % h)
 
 for q in qs:
     for m in range(MM):  
-        ym3 = se(m, q, v - 3 * h)[0]
+        #ym3 = se(m, q, v - 3 * h)[0]
         ym2 = se(m, q, v - 2 * h)[0]
         ym1 = se(m, q, v - h)[0]
         y0,y0d  = se(m, q, v)
         yp1 = se(m, q, v + h)[0]
         yp2 = se(m, q, v + 2 * h)[0]
-        yp3 = se(m, q, v + 3 * h)[0]
+        #yp3 = se(m, q, v + 3 * h)[0]
+
+ 	# 4th order coeffs for first deriv:
+        #  1/12 	−2/3 	0 	2/3 	−1/12
+        yd = (ym2/12 - 2*ym1/3 + 0*y0 + 2*yp1/3 - yp2/12)/h
 
  	# 6th order coeffs:
         #  −1/60	3/20	−3/4	0	3/4	−3/20	1/60
-        yd = (-ym3/60 + 3*ym2/20 - 3*ym1/4 + 0*y0 + 3*yp1/4 - 3*yp2/20 + yp3/60)/h
+        #yd = (-ym3/60 + 3*ym2/20 - 3*ym1/4 + 0*y0 + 3*yp1/4 - 3*yp2/20 + yp3/60)/h
 
         # Residual
         r = yd-y0d
@@ -112,7 +120,6 @@ for q in qs:
 
 M, Q = np.meshgrid(range(MM), qs)
 error_array = np.array(error).reshape(M.shape)
-# levels = np.arange(-20, 20, 5)
 
 plt.figure(2)
 plt.contourf(M, np.log10(Q), np.log10(error_array), levels=levels, cmap='viridis')
@@ -120,7 +127,7 @@ plt.colorbar()
 
 plt.xlabel("m")
 plt.ylabel("log10(q)")
-plt.title("se first deriv -- abs RMS err against 6th order FD")
+plt.title("se first deriv -- abs RMS err against 4th order FD")
 plt.draw()           # Draw the plt.figure
 plt.pause(0.001)     # Give GUI time to render
 

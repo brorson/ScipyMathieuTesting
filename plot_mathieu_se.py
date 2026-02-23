@@ -60,7 +60,7 @@ def plot_mathieu_se():
     plt.plot(u, y, label="se")
     plt.plot(u, yd, label="sed")
     plt.title("se and sed")
-    plt.text(2.7,2.5,txt)
+    plt.text(-.5,2.5,txt)
     plt.xlabel("v")
     plt.ylabel("se, sed")
     plt.legend()

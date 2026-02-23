@@ -35,9 +35,9 @@ def make_plot(fig_num, X, Y, errs, title, filename):
 
     plt.figure(fig_num, figsize=(8, 6))
 
-    levels = np.arange(-20, 10, 5)
+    levels = np.arange(-20, 5, 5)
 
-    cs = plt.contourf(X, Y, errs, levels=levels)
+    cs = plt.contourf(X, Y, errs, levels=levels, extend='both')
     plt.clabel(cs, inline=True)
 
     plt.xlabel("Order m")
@@ -46,10 +46,11 @@ def make_plot(fig_num, X, Y, errs, title, filename):
 
     plt.clim(-20, 10)
     plt.colorbar()
+    plt.draw()
+    plt.pause(0.001)
 
     plt.savefig(filename, dpi=300, bbox_inches="tight")
-    plt.close()
-
+    #plt.close()
     print(f"Saved: {filename}")
 
 
@@ -128,7 +129,15 @@ make_plot(
 # ============================================================
 # Mc1 & Ms2
 # ============================================================
+"""
+SDB says: Mc1 and Ms2 correspond to solutions having
+different eigenvalues.  Therefore, they are not necessarily
+linearly independent.  Therefore, the Wronskian relationship
+doesn't necessarily hold.  Therefore, this is not a valid test.
+I exclude the results of this computation from the paper.
+"""
 
+"""
 print("Computing Wronskian of Mc1 & Ms2")
 
 errs = np.zeros((len(ms), len(qs)))
@@ -159,12 +168,20 @@ make_plot(
     "Log10 of Wronskian rms error -- Mc1 Ms2",
     "wronskian_Mc1_Ms2.png"
 )
-
+"""
 
 # ============================================================
 # Ms1 & Mc2
 # ============================================================
+"""
+SDB says: Ms1 and Mc2 correspond to solutions having
+different eigenvalues.  Therefore, they are not necessarily
+linearly independent.  Therefore, the Wronskian relationship
+doesn't necessarily hold.  Therefore, this is not a valid test.
+I exclude the results of this computation from the paper.
+"""
 
+"""
 print("Computing Wronskian of Ms1 & Mc2")
 
 errs = np.zeros((len(ms), len(qs)))
@@ -195,7 +212,7 @@ make_plot(
     "Log10 of Wronskian rms error -- Ms1 Mc2",
     "wronskian_Ms1_Mc2.png"
 )
-
+"""
 
 print("\nAll plots generated successfully.")
 # Do this to stop the program from closing all windows when
